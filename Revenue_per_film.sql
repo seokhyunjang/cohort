@@ -1,18 +1,18 @@
 # 1단계 영화별 매출 Revenue_per_film.sql
 
 SELECT
-f.film_id,
-f.title,
-f.rental_rate* COUNT(*) total_revenue
+    f.film_id,
+    f.title,
+    f.rental_rate* COUNT(*) total_revenue
 
 FROM
-rental r,
-film f,
-inventory i
+    rental r,
+    film f,
+    inventory i
 
 WHERE
-r.inventory_id=i.inventory_id
-AND i.inventory_id=f.film_id
+    r.inventory_id=i.inventory_id
+    AND i.inventory_id=f.film_id
 
 GROUP BY 1;
 
@@ -25,18 +25,18 @@ DROP TEMPORARY TABLE IF EXISTS revenue_per_film;
 CREATE TEMPORARY TABLE revenue_per_film
 
 SELECT
-f.film_id,
-f.title,
-f.rental_rate* COUNT(*) total_revenue
+    f.film_id,
+    f.title,
+    f.rental_rate* COUNT(*) total_revenue
 
 FROM
-rental r,
-film f,
-inventory i
+    rental r,
+    film f,
+    inventory i
 
 WHERE
-r.inventory_id=i.inventory_id
-AND i.inventory_id=f.film_id
+    r.inventory_id=i.inventory_id
+    AND i.inventory_id=f.film_id
 
 GROUP BY 1;
 
