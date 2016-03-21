@@ -44,3 +44,25 @@ FROM
 	
 GROUP BY 1
 ;
+
+[3단계]
+
+#3단계
+#각각의 cohort, 월에 대해서 매출을 구한다.
+
+SELECT
+	r.*,
+	LEFT(fr.first_time,7) cohort,
+	p.amount
+	
+FROM
+	rental r,
+	first_rental fr,
+	cohort_size cs,
+	payment p
+	
+WHERE
+	r.customer_id=fr.customer_id
+	AND cs.month = LEFT(fr.first_time,7)
+	AND p.rental_id = r.rental_id
+;
