@@ -45,7 +45,7 @@ FROM
 GROUP BY 1
 ;
 
-[3단계]
+[3단계- A버전(WHERE/AND)]
 
 #3단계
 #각각의 cohort, 월에 대해서 매출을 구한다.
@@ -66,3 +66,27 @@ WHERE
 	AND cs.month = LEFT(fr.first_time,7)
 	AND p.rental_id = r.rental_id
 ;
+
+↓↓↓
+↓↓↓
+
+[3단계- B버전(JOIN/ON)]
+# WHREE은 너무 느려져서! JOIN으로 변경
+
+SELECT
+    r.*,
+    LEFT(fr .first_time, 7) cohort,
+    p.amount
+
+FROM
+    rental r
+    JOIN  first_rental fr
+    ON    r .customer_id= fr.customer_id
+
+    JOIN  cohort_size cs
+    ON    cs .month = LEFT(fr .first_time, 7)
+
+    JOIN  payment p
+    ON    p .rental_id = r.rental_id
+;
+
